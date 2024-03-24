@@ -1,1 +1,34 @@
-Test
+## Inspiration
+We wanted to construct LLM workflows to solve actual problems for people such as analysts, teachers and reporters!
+
+## What it does
+We built a DAG Flow representing the AI Agent steps of a workflow for a business analyst, in this case analyzing municipal bonds:
+1.  Retrieve list of municipalities in California
+2. For each municipality, use Brave Search to retrieve municipal government link
+3. Use Mistral to crawl through domain to find pdf link.
+4. Fallback to MultiOn to download pdf if download link can't be found
+5. Ingest content such as PDF by chunking and extracting tables from PDF
+6. Construct new revenue/expense/debt reports and graphs by reranking and retrieving relevant chunks
+
+## How we built it
+We setup abstracted reusable nodes that can be configured to depend on each other for each of the above steps. 
+
+We used Brave search to get initial links from which to do LLM [Mistral] guided web crawl. For complicated cases we fallback to MultiOn to retrieve the relevant data.
+
+We built a Streamlit UI to demo our workflow.
+
+## Challenges we ran into
+We quickly learned the difficulty of web crawling, parsing and interacting with HTML responses that sites return.
+
+Additionally, working with PDF's was an additional challenge.
+
+We learned the relative expense of different tools, such as that MultiOn cost $0.50 per call, so we had to resort to this tool as a fallback.
+
+## Accomplishments that we're proud of
+We were able to do an End-To-End workflow of our approach.
+
+## What we learned
+Demoing usage of tools such as Mistral, MultiOn, Streamlit.
+
+## What's next for rtrvr.ai
+Hopefully more addons to come such as a workflow and data exchange to monetize the output of these workflows.
